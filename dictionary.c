@@ -49,10 +49,8 @@ int count = 0;
 /**
  * Returns true if word is in dictionary else false.
  */
- 
 bool check(const char* word)
-{   
-    
+{
     //Create a lowercase copy of the word.
     int len = strlen(word);
     char copy[LENGTH + 1];
@@ -67,24 +65,21 @@ bool check(const char* word)
     
     //create a pointer variable pointing to the 1st node.
     struct node* ptr = hashArray[index];
-   
-   //compare the lowercase copy with words in the node.
+    
+    //compare the lowercase copy with words in the node.
     while (ptr!= NULL)
     {
         if (strcmp(copy, ptr->word) == 0)
         {
             //return true if the copy and word are the same.
             return true;
-            
         }
         
         //increment the pointer variable.
         ptr = ptr-> next;
-        
     }
     
     return false;
-    
 }
 
 /**
@@ -115,8 +110,7 @@ bool load(const char* dictionary)
         //if the node does not exist, return false.
         if (temp == NULL)
         {
-            return false;
-            
+            return false;  
         }
         
         //Copy the string into the node, including the terminating null character. 
@@ -124,9 +118,7 @@ bool load(const char* dictionary)
         
         //define the hash table index
         int hashIndex = hashFunc(temp->word);
-        
         if(hashArray[hashIndex]==NULL)
-    
         {
             //the hash array pointing to the 1st node.
             hashArray[hashIndex] = temp;
@@ -134,9 +126,7 @@ bool load(const char* dictionary)
             //count the number of words loaded.
             count ++;
         }
-        
         else
-        
         {
             //the 2nd node pointing to the 1st node. 
             temp->next = hashArray[hashIndex];
@@ -145,30 +135,22 @@ bool load(const char* dictionary)
             hashArray[hashIndex] = temp;
             
             //count the number of words loaded.
-            count ++;
-            
-        }
-        
+            count ++;   
+        } 
     }
     
     //close the dictionary file.
-    
     fclose(input);
     
      //if the hash array is not null, return true, else false.
     for (int index = 0; index < SIZE; index++ )
     {  
         if (hashArray[index] != NULL)
-        
         {
-            return true;
-            
+            return true;  
         }
-        
     }
-    
-    return false;
-    
+    return false;  
 }
 
 /**
@@ -176,20 +158,14 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
- 
     for (int index = 0; index < SIZE; index++)
     {
-        
         if (hashArray[index] != NULL)
         {
-            return count;
-            
+            return count; 
         }
-        
     }
-    
     return 0;
-    
 }
 
 /**
@@ -210,20 +186,14 @@ bool unload(void)
             
             //deallocate the memory of the 1st node.
             free(temp);
-            temp = NULL;
-            
+            temp = NULL; 
         }
         
         //if the hash array is not null, return false, else true.
         if (hashArray[index] != NULL)
-        
         {
-            return false;
-            
-        } 
-        
+            return false; 
+        }  
     }
-    
-    return true;
-    
+    return true; 
 }
